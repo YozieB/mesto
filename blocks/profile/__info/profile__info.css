@@ -1,0 +1,9 @@
+.profile__info {
+    overflow: hidden;
+}
+
+@media(max-width: 650px) {
+    .profile__info {
+        margin: 25px 0 36px;
+    }
+}

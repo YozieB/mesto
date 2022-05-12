@@ -1,0 +1,17 @@
+.popup__form-btn {
+    width: 100%;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #fff;
+    background-color: #000;
+    padding: 14px 10px;
+    border: none;
+}
+
+@media(max-width: 540px) {
+    .popup__form-btn {
+        font-size: 14px;
+        line-height: 17px;
+    }
+}
