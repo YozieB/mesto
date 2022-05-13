@@ -3,3 +3,9 @@
     align-items: center;
     margin-bottom: 16px;
 }
+
+@media (max-width: 650px) {
+    .profile__name {
+        justify-content: center;
+    }
+}

@@ -1,5 +1,6 @@
 .profile__info {
     overflow: hidden;
+    max-width: 100%;
 }
 
 @media(max-width: 650px) {

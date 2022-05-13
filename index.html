@@ -10,7 +10,7 @@
 
 <body class="page">
     <header class="container header">
-        <img src="images/logo.svg" class="image" alt="Место">
+        <img src="images/logo.svg" class="image header__image" alt="Место">
     </header>
 
     <main>
@@ -21,82 +21,77 @@
                     <h1 class="profile__title">
                         Жак-Ив Кусто
                     </h1>
-                    <button class="profile__edit-btn">
-                        <img loading="lazy" src="images/edit.svg" class="image" alt="Изменить">
-                    </button>
+                    <button type="button" class="profile__edit-btn"></button>
                 </div>
-                <h2 class="profile__about">
+                <p class="profile__about">
                     Исследователь океана
-                </h2>
+                </p>
             </div>
-            <button class="profile__add-btn">
-                <img loading="lazy" src="images/add.svg" class="image" alt="Добавить">
+            <button type="button" class="profile__add-btn">
             </button>
         </section>
         <section class="container gallery">
             <div class="card">
                 <img src="images/gallery-1.jpg" class="image card__image" alt="Карачаевск">
                 <div class="card__info">
-                    <h3 class="card__title">Карачаевск</h3>
-                    <button class="card__heart"></button>
+                    <h2 class="card__title">Карачаевск</h2>
+                    <button type="button" class="card__heart"></button>
                 </div>
             </div>
             <div class="card">
                 <img src="images/gallery-2.jpg" class="image card__image" alt="Гора Эльбрус">
                 <div class="card__info">
-                    <h3 class="card__title">Гора Эльбрус</h3>
-                    <button class="card__heart"></button>
+                    <h2 class="card__title">Гора Эльбрус</h2>
+                    <button type="button" class="card__heart"></button>
                 </div>
             </div>
             <div class="card">
                 <img src="images/gallery-3.jpg" class="image card__image" alt="Домбай">
                 <div class="card__info">
-                    <h3 class="card__title">Домбай</h3>
-                    <button class="card__heart"></button>
+                    <h2 class="card__title">Домбай</h2>
+                            <button type="button" class="card__heart"></button>
                 </div>
             </div>
             <div class="card">
                 <img src="images/gallery-4.jpg" class="image card__image" alt="Альпы">
                 <div class="card__info">
-                    <h3 class="card__title">Альпы</h3>
-                    <button class="card__heart"></button>
+                    <h2 class="card__title">Альпы</h2>
+                    <button type="button" class="card__heart"></button>
                 </div>
             </div>
             <div class="card">
                 <img src="images/gallery-5.jpg" class="image card__image" alt="Сан-Марино">
                 <div class="card__info">
-                    <h3 class="card__title">Сан-Марино</h3>
-                    <button class="card__heart"></button>
+                    <h2 class="card__title">Сан-Марино</h2>
+                    <button type="button" class="card__heart"></button>
                 </div>
             </div>
             <div class="card">
                 <img src="images/gallery-6.jpg" class="image card__image" alt="Новая Зеландия">
                 <div class="card__info">
-                    <h3 class="card__title">Новая Зеландия</h3>
-                    <button class="card__heart"></button>
+                    <h2 class="card__title">Новая Зеландия</h2>
+                    <button type="button" class="card__heart"></button>
                 </div>
             </div>
         </section>
         <section class="popup">
             <div class="popup__container">
                 <p class="popup__title">Редактировать профиль</p>
-                <button class="popup__close-btn">
-                    <img loading="lazy" src="images/close.svg" class="image" alt="Закрыть">
-                </button>
-                <form action="#" class="popup__form">
-                    <input type="text" class="popup__input popup__input_name" placeholder="Имя">
-                    <input type="text" class="popup__input popup__input_job" placeholder="Работа">
+                <button type="button" class="popup__close-btn"></button>
+                <form action="#" name="Данные профиля" class="popup__form">
+                    <input type="text" class="popup__input popup__input_name" name="Имя" placeholder="Имя">
+                    <input type="text" class="popup__input popup__input_job" name="Работа" placeholder="Работа">
                     <button class="popup__form-btn" type="submit">Сохранить</button>
                 </form>
             </div>
         </section>
     </main>
     <footer class="container footer">
-        <h4 class="footer__copy">
+        <p class="footer__copy">
             &copy; 2020 Mesto Russia
-        </h4>
+        </p>
     </footer>
-    <script defer src="scripts/main.js"></script>
+    <script defer src="scripts/script.js"></script>
 </body>
 
 </html>
