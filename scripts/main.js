@@ -6,6 +6,7 @@ let job = document.querySelector('.profile__about');
 let formElement = document.querySelector('.popup__form');
 let nameInput = formElement.querySelector('.popup__input_name');
 let jobInput = formElement.querySelector('.popup__input_job');
+let heart = document.querySelectorAll('.card__heart');
 
 editProfile.addEventListener('click', () => {
     nameInput.value = author.textContent.trim();
@@ -17,7 +18,6 @@ closePopup.addEventListener('click', () => {
     popup.classList.remove('popup_opened');
 });
 
-
 function formSubmitHandler(evt) {
     evt.preventDefault();
     author.textContent = nameInput.value;
@@ -26,3 +26,13 @@ function formSubmitHandler(evt) {
 }
 
 formElement.addEventListener('submit', formSubmitHandler);
+
+for (let i = 0; i < heart.length; i++) {
+    heart[i].addEventListener('click', () => {
+        if (heart[i].classList.contains('card__heart_active')) {
+            heart[i].classList.remove('card__heart_active');
+        } else {
+            heart[i].classList.add('card__heart_active');
+        }
+    });
+}

@@ -1,10 +1,25 @@
 .profile__edit-btn {
-    margin-left: 18px;
-    width: 22px;
+    margin: 0 0 0 18px;
+    min-width: 22px;
     height: 22px;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid #fff;
     transform: translateY(3px);
+    cursor: pointer;
+    padding: 0;
+    background-color: transparent;
+    transition: opacity .3s ease;
+}
+
+.profile__edit-btn:hover {
+    opacity: .6;
+}
+
+@media (max-width: 650px) {
+    .profile__edit-btn {
+        margin-left: 10px;
+        transform: translateY(0px);
+    }
 }
