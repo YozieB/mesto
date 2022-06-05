@@ -1,15 +1,17 @@
-.popup__container {
+.popup__item {
+    visibility: hidden;
+    position: absolute;
+    opacity: 0;
+    transition: opacity .3s ease, visibility .3s ease;
     padding: 35px;
     max-width: 430px;
     box-sizing: border-box;
     background: #fff;
     width: 91%;
     border-radius: 10px;
-    position: relative;
 }
-
 @media(max-width: 540px) {
-    .popup__container {
+    .popup__item {
         padding: 25px 22px;
     }
 }

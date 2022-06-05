@@ -1,4 +1,5 @@
 .card {
+    position: relative;
     grid-column: 4 span;
     overflow: hidden;
     display: flex;
