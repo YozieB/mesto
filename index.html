@@ -32,32 +32,37 @@
         </section>
         <section class="container gallery">
         </section>
-        <section class="popup">
-                <div class="popup__item popup__bio">
-                    <p class="popup__title">Редактировать профиль</p>
-                    <button type="button" class="popup__close-btn"></button>
-                    <form action="#" name="Данные профиля" class="popup__form">
-                        <input type="text" class="popup__input popup__input_name" name="Имя" placeholder="Имя">
-                        <input type="text" class="popup__input popup__input_job" name="Работа" placeholder="Работа">
-                        <button class="popup__form-btn" type="submit">Сохранить</button>
-                    </form>
-                </div>
-                <div class="popup__item popup__card">
-                    <p class="popup__title">Новое место</p>
-                    <button type="button" class="popup__close-btn"></button>
-                    <form action="#" name="Данные профиля" class="popup__form">
-                        <input type="text" class="popup__input popup__input_place" name="Название" placeholder="Название">
-                        <input type="text" class="popup__input popup__input_link" name="Ссылка на картинку" placeholder="Ссылка на картинку">
-                        <button class="popup__form-btn" type="submit">Создать</button>
-                    </form>
-                </div>
-                <div class="popup__image">
-                    <button type="button" class="popup__close-btn"></button>
-                    <img class="popup__image-pic">
-                    <div class="popup__image-title">sad</div>
-                </div>
-        </section>
     </main>
+    <div class="popup profile-popup">
+        <div class="popup__container">
+            <p class="popup__title">Редактировать профиль</p>
+            <button type="button" class="popup__close-btn"></button>
+            <form action="#" name="Данные профиля" class="popup__form">
+                <input type="text" class="popup__input popup__input_name" name="Имя" placeholder="Имя">
+                <input type="text" class="popup__input popup__input_job" name="Работа" placeholder="Работа">
+                <button class="popup__form-btn" type="submit">Сохранить</button>
+            </form>
+        </div>
+    </div>
+    <div class="popup card-popup">
+        <div class="popup__container">
+            <p class="popup__title">Новое место</p>
+            <button type="button" class="popup__close-btn"></button>
+            <form action="#" name="Данные профиля" class="popup__form">
+                <input type="text" class="popup__input popup__input_place" name="Название" placeholder="Название">
+                <input type="text" class="popup__input popup__input_link" name="Ссылка на картинку"
+                    placeholder="Ссылка на картинку">
+                <button class="popup__form-btn" type="submit">Создать</button>
+            </form>
+        </div>
+    </div>
+    <div class="popup image-popup">
+        <div class="popup__container popup__container_image">
+            <button type="button" class="popup__close-btn"></button>
+            <img class="popup__image-pic">
+            <div class="popup__image-title"></div>
+        </div>
+    </div>
     <footer class="container footer">
         <p class="footer__copy">
             &copy; 2020 Mesto Russia

@@ -1,6 +1,0 @@
-.popup__image {
-    visibility: hidden;
-    position: absolute;
-    opacity: 0;
-    transition: opacity .3s ease, visibility .3s ease;
-}
