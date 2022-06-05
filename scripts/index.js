@@ -1,5 +1,4 @@
 const editProfile = document.querySelector('.profile__edit-btn');
-const popup = document.querySelector('.popup');
 const closeButtons = document.querySelectorAll('.popup__close-btn');
 const author = document.querySelector('.profile__title');
 const job = document.querySelector('.profile__about');
@@ -68,6 +67,7 @@ const createCard = (name, link) => {
         openPopup(popupImage);
         bigPicture.src = link;
         bigPictureTitle.textContent = name;
+        bigPicture.alt = name;
     });
     
     return card
