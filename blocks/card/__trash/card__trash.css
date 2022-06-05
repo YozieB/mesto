@@ -1,5 +1,14 @@
 .card__trash {
     position: absolute;
+    width: 18px;
+    height: 19px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-image: url(../../../images/trash.svg);
+    background-size: cover;
+    background-position: center;
+    background-color: transparent;
     right: 20px;
     top: 20px;
     cursor: pointer;
