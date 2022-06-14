@@ -1,12 +1,12 @@
 const editProfile = document.querySelector('.profile__edit-btn');
-const closeButtons = document.querySelectorAll('.popup__close-btn');
 const author = document.querySelector('.profile__title');
 const job = document.querySelector('.profile__about');
-const profileForm = document.querySelector('.popup__form');
-const profileName = profileForm.querySelector('.popup__input_name');
-const profileJob = profileForm.querySelector('.popup__input_job');
-const cardName = document.querySelector('.popup__input_place');
-const cardLink = document.querySelector('.popup__input_link');
+const profileForm = document.forms.profile;
+const cardForm = document.forms.place;
+const profileName = profileForm.elements.name;
+const profileJob = profileForm.elements.job;
+const cardName = cardForm.elements.place;
+const cardLink = cardForm.elements.link;
 const addCardBtn = document.querySelector('.profile__add-btn');
 const gallery = document.querySelector('.gallery');
 const initialCards = [{
@@ -37,9 +37,9 @@ const initialCards = [{
 const popupImage = document.querySelector('.image-popup');
 const popupProfile = document.querySelector('.profile-popup');
 const popupCard = document.querySelector('.card-popup');
-const cardForm = popupCard.querySelector('.popup__form');
 const bigPicture = popupImage.querySelector('.popup__image-pic');
 const bigPictureTitle = popupImage.querySelector('.popup__image-title')
+const modals = document.querySelectorAll('.popup');
 
 // Creating card
 const createCard = (name, link) => {
@@ -54,22 +54,22 @@ const createCard = (name, link) => {
     cardImage.src = link;
     cardImage.alt = name;
 
-    heart.addEventListener('click', (e) => {
+    heart.addEventListener('click', e => {
         e.target.classList.toggle('card__heart_active');
     });
 
-    removeBtn.addEventListener('click', (e) => {
+    removeBtn.addEventListener('click', e => {
         const closestCard = e.target.closest('.card');
         closestCard.remove();
     });
 
-    cardImage.addEventListener('click', (e) => {
+    cardImage.addEventListener('click', e => {
         openPopup(popupImage);
         bigPicture.src = link;
         bigPictureTitle.textContent = name;
         bigPicture.alt = name;
     });
-    
+
     return card
 }
 
@@ -83,24 +83,59 @@ const closePopup = (element) => {
     element.classList.remove('popup_opened');
 }
 
+// Remove errors
+const removeErrors = (element) => {
+    const textErrors = element.querySelectorAll('.popup__error');
+    const inputErrors = element.querySelectorAll('.popup__input_type_error')
+    textErrors.forEach(el => {
+        el.classList.remove('popup__error_visible');
+    });
+    inputErrors.forEach(el => {
+        el.classList.remove('popup__input_type_error')
+    })
+}
+
+const updateBio = () => {
+    profileName.value = author.textContent.trim();
+    profileJob.value = job.textContent.trim();
+}
+
+const resetForm = (element) => {
+    const form = element.querySelector('.popup__form');
+    if (form) {
+        form.reset()
+    }
+}
+
 // Adding start cards
 initialCards.forEach(el => {
     gallery.append(createCard(el.name, el.link));
 })
 
 // Adding new card
-cardForm.addEventListener('submit', (e) => {
+cardForm.addEventListener('submit', e => {
     e.preventDefault();
     gallery.prepend(createCard(cardName.value, cardLink.value));
-    cardForm.reset();
     closePopup(popupCard);
 })
 
-closeButtons.forEach(button => {
-    const popup = button.closest('.popup');
-    button.addEventListener('click', (e) => {
-        closePopup(popup)
-    });
+// closing popups
+modals.forEach(el => {
+    el.addEventListener('mousedown', e => {
+        if (e.target.classList.contains('popup_opened') || e.target.classList.contains('popup__close-btn')) {
+            closePopup(el)
+            removeErrors(el)
+            setTimeout(resetForm, 300, el)
+        }
+    })
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+            closePopup(el)
+            removeErrors(el)
+            setTimeout(resetForm, 300, el)
+        }
+    })
 })
 
 addCardBtn.addEventListener('click', () => {
@@ -109,13 +144,14 @@ addCardBtn.addEventListener('click', () => {
 
 editProfile.addEventListener('click', () => {
     openPopup(popupProfile);
-    profileName.value = author.textContent.trim();
-    profileJob.value = job.textContent.trim();
+    updateBio()
 });
 
-profileForm.addEventListener('submit', (e) => {
+profileForm.addEventListener('submit', e => {
     e.preventDefault()
     author.textContent = profileName.value;
     job.textContent = profileJob.value;
     closePopup(popupProfile)
 });
+
+updateBio()
