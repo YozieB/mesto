@@ -1,13 +1,13 @@
-const editProfile = document.querySelector('.profile__edit-btn');
 const author = document.querySelector('.profile__title');
 const job = document.querySelector('.profile__about');
+const profileBtn = document.querySelector('.profile__edit-btn');
 const profileForm = document.forms.profile;
-const cardForm = document.forms.place;
 const profileName = profileForm.elements.name;
 const profileJob = profileForm.elements.job;
+const cardForm = document.forms.place;
 const cardName = cardForm.elements.place;
 const cardLink = cardForm.elements.link;
-const addCardBtn = document.querySelector('.profile__add-btn');
+const cardBtn = document.querySelector('.profile__add-btn');
 const gallery = document.querySelector('.gallery');
 const initialCards = [{
         name: 'Архыз',
@@ -76,23 +76,13 @@ const createCard = (name, link) => {
 // Open popup
 const openPopup = (element) => {
     element.classList.add('popup_opened');
+    document.addEventListener('keydown', closePopupKeyboard);
 }
 
 // Close popup
 const closePopup = (element) => {
     element.classList.remove('popup_opened');
-}
-
-// Remove errors
-const removeErrors = (element) => {
-    const textErrors = element.querySelectorAll('.popup__error');
-    const inputErrors = element.querySelectorAll('.popup__input_type_error')
-    textErrors.forEach(el => {
-        el.classList.remove('popup__error_visible');
-    });
-    inputErrors.forEach(el => {
-        el.classList.remove('popup__input_type_error')
-    })
+    document.removeEventListener('keydown', closePopupKeyboard);
 }
 
 const updateBio = () => {
@@ -100,10 +90,10 @@ const updateBio = () => {
     profileJob.value = job.textContent.trim();
 }
 
-const resetForm = (element) => {
-    const form = element.querySelector('.popup__form');
-    if (form) {
-        form.reset()
+const closePopupKeyboard = e => {
+    const element = document.querySelector('.popup_opened');
+    if (e.key === 'Escape') {
+        closePopup(element);
     }
 }
 
@@ -123,35 +113,28 @@ cardForm.addEventListener('submit', e => {
 modals.forEach(el => {
     el.addEventListener('mousedown', e => {
         if (e.target.classList.contains('popup_opened') || e.target.classList.contains('popup__close-btn')) {
-            closePopup(el)
-            removeErrors(el)
-            setTimeout(resetForm, 300, el)
-        }
-    })
-
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') {
-            closePopup(el)
-            removeErrors(el)
-            setTimeout(resetForm, 300, el)
+            closePopup(el);
         }
     })
 })
 
-addCardBtn.addEventListener('click', () => {
-    openPopup(popupCard)
+cardBtn.addEventListener('click', () => {
+    removeErrors(popupCard);
+    /* hideInputError(formSelector, inputSelector, inputErrorClass, errorClass); */
+    openPopup(popupCard);
+    cardForm.reset();
 })
 
-editProfile.addEventListener('click', () => {
+profileBtn.addEventListener('click', () => {
+    removeErrors(popupProfile);
+    /* hideInputError(formSelector, inputSelector, inputErrorClass, errorClass); */
     openPopup(popupProfile);
-    updateBio()
+    updateBio();
 });
 
 profileForm.addEventListener('submit', e => {
-    e.preventDefault()
+    e.preventDefault();
     author.textContent = profileName.value;
     job.textContent = profileJob.value;
-    closePopup(popupProfile)
+    closePopup(popupProfile);
 });
-
-updateBio()
