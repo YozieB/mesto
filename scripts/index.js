@@ -74,13 +74,13 @@ const createCard = (name, link) => {
 }
 
 // Open popup
-const openPopup = (element) => {
+const openPopup = element => {
     element.classList.add('popup_opened');
     document.addEventListener('keydown', closePopupKeyboard);
 }
 
 // Close popup
-const closePopup = (element) => {
+const closePopup = element => {
     element.classList.remove('popup_opened');
     document.removeEventListener('keydown', closePopupKeyboard);
 }
@@ -120,14 +120,12 @@ modals.forEach(el => {
 
 cardBtn.addEventListener('click', () => {
     removeErrors(popupCard);
-    /* hideInputError(formSelector, inputSelector, inputErrorClass, errorClass); */
     openPopup(popupCard);
     cardForm.reset();
 })
 
 profileBtn.addEventListener('click', () => {
     removeErrors(popupProfile);
-    /* hideInputError(formSelector, inputSelector, inputErrorClass, errorClass); */
     openPopup(popupProfile);
     updateBio();
 });
