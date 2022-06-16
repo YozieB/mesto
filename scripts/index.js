@@ -91,8 +91,8 @@ const updateBio = () => {
 }
 
 const closePopupKeyboard = e => {
-    const element = document.querySelector('.popup_opened');
     if (e.key === 'Escape') {
+        const element = document.querySelector('.popup_opened');
         closePopup(element);
     }
 }
@@ -119,9 +119,12 @@ modals.forEach(el => {
 })
 
 cardBtn.addEventListener('click', () => {
+    const button = cardForm.querySelector('.popup__form-btn');
+    button.setAttribute('disabled', true);
+    button.classList.add('popup__form-btn_disabled')
     removeErrors(popupCard);
-    openPopup(popupCard);
     cardForm.reset();
+    openPopup(popupCard);
 })
 
 profileBtn.addEventListener('click', () => {
