@@ -22,6 +22,7 @@ const modals = document.querySelectorAll('.popup')
 
 const generateValidation = (data, selector) => {
   const form = new FormValidator(data, selector)
+
   return form
 }
 
@@ -35,6 +36,7 @@ const cardFormValidation = generateValidation(validationSettings, cardForm)
 const generateCard = (data, selector) => {
   const card = new Card(data, selector)
   const cardElement = card.generateCard()
+
   return cardElement
 }
 
