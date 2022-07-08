@@ -1,5 +1,6 @@
 import Card from './Card.js'
 import FormValidator from './FormValidator.js'
+import { initialCards, validationSettings } from './constants.js'
 
 const author = document.querySelector('.profile__title')
 const job = document.querySelector('.profile__about')
@@ -12,119 +13,94 @@ const cardName = cardForm.elements.place
 const cardLink = cardForm.elements.link
 const cardBtn = document.querySelector('.profile__add-btn')
 const gallery = document.querySelector('.gallery')
-const initialCards = [
-	{
-		name: 'Архыз',
-		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-	},
-	{
-		name: 'Челябинская область',
-		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
-	},
-	{
-		name: 'Иваново',
-		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
-	},
-	{
-		name: 'Камчатка',
-		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
-	},
-	{
-		name: 'Холмогорский район',
-		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
-	},
-	{
-		name: 'Байкал',
-		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
-	},
-]
 const popupImage = document.querySelector('.image-popup')
 const popupProfile = document.querySelector('.profile-popup')
 const popupCard = document.querySelector('.card-popup')
 const bigPicture = popupImage.querySelector('.popup__image-pic')
 const bigPictureTitle = popupImage.querySelector('.popup__image-title')
 const modals = document.querySelectorAll('.popup')
-const validationSettings = {
-	inputSelector: '.popup__input',
-	submitButtonSelector: '.popup__form-btn',
-	inactiveButtonClass: 'popup__form-btn_disabled',
-	inputErrorClass: 'popup__input_type_error',
-	errorClass: 'popup__error_visible',
+
+const generateValidation = (data, selector) => {
+  const form = new FormValidator(data, selector)
+  return form
 }
 
-const validation = new FormValidator(validationSettings, '.popup__form')
+const profileFormValidation = generateValidation(
+  validationSettings,
+  profileForm
+)
 
-// Open popup
+const cardFormValidation = generateValidation(validationSettings, cardForm)
+
+const generateCard = (data, selector) => {
+  const card = new Card(data, selector)
+  const cardElement = card.generateCard()
+  return cardElement
+}
+
 const openPopup = element => {
-	element.classList.add('popup_opened')
-	document.addEventListener('keydown', closePopupKeyboard)
+  element.classList.add('popup_opened')
+  document.addEventListener('keydown', closePopupKeyboard)
 }
 
-// Close popup
 const closePopup = element => {
-	element.classList.remove('popup_opened')
-	document.removeEventListener('keydown', closePopupKeyboard)
+  element.classList.remove('popup_opened')
+  document.removeEventListener('keydown', closePopupKeyboard)
 }
 
 const closePopupKeyboard = e => {
-	const element = document.querySelector('.popup_opened')
-	if (e.key === 'Escape') {
-		closePopup(element)
-	}
+  if (e.key === 'Escape') {
+    const element = document.querySelector('.popup_opened')
+    closePopup(element)
+  }
 }
 
 const updateBio = () => {
-	profileName.value = author.textContent.trim()
-	profileJob.value = job.textContent.trim()
+  profileName.value = author.textContent.trim()
+  profileJob.value = job.textContent.trim()
 }
 
-// closing popups
 modals.forEach(el => {
-	el.addEventListener('mousedown', e => {
-		if (
-			e.target.classList.contains('popup_opened') ||
-			e.target.classList.contains('popup__close-btn')
-		) {
-			closePopup(el)
-		}
-	})
+  el.addEventListener('mousedown', e => {
+    if (
+      e.target.classList.contains('popup_opened') ||
+      e.target.classList.contains('popup__close-btn')
+    ) {
+      closePopup(el)
+    }
+  })
 })
 
 cardBtn.addEventListener('click', () => {
-	validation.removeErrors(popupCard)
-	openPopup(popupCard)
-	cardForm.reset()
+  cardFormValidation.resetValidation()
+  openPopup(popupCard)
+  cardForm.reset()
 })
 
 profileBtn.addEventListener('click', () => {
-	validation.removeErrors(popupProfile)
-	openPopup(popupProfile)
-	updateBio()
+  profileFormValidation.resetValidation()
+  openPopup(popupProfile)
+  updateBio()
 })
 
 profileForm.addEventListener('submit', e => {
-	e.preventDefault()
-	author.textContent = profileName.value
-	job.textContent = profileJob.value
-	closePopup(popupProfile)
+  e.preventDefault()
+  author.textContent = profileName.value
+  job.textContent = profileJob.value
+  closePopup(popupProfile)
 })
 
-initialCards.forEach(item => {
-	const card = new Card(item, '#card')
-	const cardElement = card.generateCard()
-	gallery.append(cardElement)
-})
+initialCards.forEach(item => gallery.append(generateCard(item, '#card')))
 
 cardForm.addEventListener('submit', e => {
-	e.preventDefault()
-
-	const card = new Card({ name: cardName.value, link: cardLink.value }, '#card')
-	const cardElement = card.generateCard()
-
-	gallery.prepend(cardElement)
-	closePopup(popupCard)
+  e.preventDefault()
+  gallery.prepend(
+    generateCard({ name: cardName.value, link: cardLink.value }, '#card')
+  )
+  closePopup(popupCard)
 })
 
-validation.enableValidation()
+profileFormValidation.enableValidation()
+cardFormValidation.enableValidation()
 
 export { openPopup, popupImage, bigPicture, bigPictureTitle }
