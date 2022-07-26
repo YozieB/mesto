@@ -1,10 +1,9 @@
-import { openPopup, popupImage, bigPicture, bigPictureTitle } from './index.js'
-
 export default class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, { handleCardClick }) {
     this._name = data.name
     this._link = data.link
     this._cardSelector = cardSelector
+    this.handleCardClick = handleCardClick
   }
 
   _getTemplate() {
@@ -30,10 +29,7 @@ export default class Card {
     this._element
       .querySelector('.card__image')
       .addEventListener('click', () => {
-        openPopup(popupImage)
-        bigPicture.src = this._link
-        bigPictureTitle.textContent = this._name
-        bigPicture.alt = this._name
+        this.handleCardClick(this._name, this._link)
       })
   }
 

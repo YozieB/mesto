@@ -31,5 +31,28 @@ const validationSettings = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible',
 }
+const gallery = '.gallery'
+const cardPopupSelector = '.card-popup'
+const profilePopupSelector = '.profile-popup'
+const imagePopupSelector = '.image-popup'
+const profileBtn = document.querySelector('.profile__edit-btn')
+const cardBtn = document.querySelector('.profile__add-btn')
+const cardForm = document.forms.place
+const profileForm = document.forms.profile
+const profileName = profileForm.elements.name
+const profileJob = profileForm.elements.job
 
-export { initialCards, validationSettings }
+export {
+  initialCards,
+  validationSettings,
+  gallery,
+  cardPopupSelector,
+  profilePopupSelector,
+  imagePopupSelector,
+  profileBtn,
+  cardBtn,
+  profileForm,
+  profileName,
+  profileJob,
+  cardForm,
+}
