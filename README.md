@@ -10,7 +10,7 @@
 - CSS
 - JavaScript ООП
 - Файловая струткура по БЭМ Nested
-- Проект собран с помощью Weback
+- Проект собран с помощью Webpack
 
 ## Github Pages
 
