@@ -43,7 +43,6 @@ const userInfo = new UserInfo({
   name: '.profile__title',
   bio: '.profile__about',
 })
-const updateBio = userInfo.getUserInfo()
 
 const imagePopup = new PopupWithImage(imagePopupSelector)
 imagePopup.setEventListeners()
@@ -67,12 +66,12 @@ profilePopup.setEventListeners()
 cardBtn.addEventListener('click', () => {
   cardFormValidation.resetValidation()
   cardPopup.open()
-  cardPopup.reset()
 })
 
 profileBtn.addEventListener('click', () => {
   profileFormValidation.resetValidation()
   profilePopup.open()
+  const updateBio = userInfo.getUserInfo()
   profileName.value = updateBio.name
   profileJob.value = updateBio.bio
 })

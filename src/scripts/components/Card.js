@@ -15,6 +15,10 @@ export default class Card {
     return card
   }
 
+  _removeCard() {
+    this._element.remove()
+  }
+
   _handleLike(e) {
     e.target.classList.toggle('card__heart_active')
   }
@@ -25,22 +29,20 @@ export default class Card {
     })
     this._element
       .querySelector('.card__trash')
-      .addEventListener('click', () => this._element.remove())
-    this._element
-      .querySelector('.card__image')
-      .addEventListener('click', () => {
-        this.handleCardClick(this._name, this._link)
-      })
+      .addEventListener('click', () => this._removeCard())
+    this._cardImage.addEventListener('click', () => {
+      this.handleCardClick(this._name, this._link)
+    })
   }
 
   generateCard() {
     this._element = this._getTemplate()
+    this._cardImage = this._element.querySelector('.card__image')
+    this._cardTitle = this._element.querySelector('.card__title')
     this._setEventListeners()
-    const cardImage = this._element.querySelector('.card__image')
-    const cardTitle = this._element.querySelector('.card__title')
-    cardImage.src = this._link
-    cardImage.alt = this._name
-    cardTitle.textContent = this._name
+    this._cardImage.src = this._link
+    this._cardImage.alt = this._name
+    this._cardTitle.textContent = this._name
 
     return this._element
   }

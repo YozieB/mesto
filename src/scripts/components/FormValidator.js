@@ -42,13 +42,21 @@ export default class FormValidator {
     })
   }
 
+  _disableBtn() {
+    this._buttonElement.classList.add(this._inactiveButtonClass)
+    this._buttonElement.setAttribute('disabled', true)
+  }
+
+  _enableBtn() {
+    this._buttonElement.classList.remove(this._inactiveButtonClass)
+    this._buttonElement.removeAttribute('disabled', true)
+  }
+
   _toggleButtonState() {
     if (this._hasInvalidInput()) {
-      this._buttonElement.classList.add(this._inactiveButtonClass)
-      this._buttonElement.setAttribute('disabled', true)
+      this._disableBtn()
     } else {
-      this._buttonElement.classList.remove(this._inactiveButtonClass)
-      this._buttonElement.removeAttribute('disabled', true)
+      this._enableBtn()
     }
   }
 
@@ -63,8 +71,7 @@ export default class FormValidator {
   }
 
   resetValidation() {
-    this._buttonElement.classList.add(this._inactiveButtonClass)
-    this._buttonElement.setAttribute('disabled', true)
+    this._disableBtn()
     this._inputList.forEach(el => this._hideInputError(el))
   }
 
