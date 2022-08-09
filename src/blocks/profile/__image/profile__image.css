@@ -1,4 +1,8 @@
 .profile__image {
+    display: block;
     border-radius: 50%;
     max-width: 120px;
+    min-height: 120px;
+    transition: opacity .3s ease;
+    cursor: pointer;
 }

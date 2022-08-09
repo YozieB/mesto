@@ -32,12 +32,11 @@
 @import url(../blocks/card/__trash/card__trash.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__container/_image/popup__container_image.css);
-@import url(../blocks/profile-popup/profile-popup.css);
-@import url(../blocks/card-popup/card-popup.css);
-@import url(../blocks/image-popup/image-popup.css);
-
 @import url(../blocks/popup/__input/_type/popup__input_type_error.css);
 @import url(../blocks/popup/__form-btn/_disabled/popup__form-btn_disabled.css);
 @import url(../blocks/popup/__form-field/popup__form-field.css);
 @import url(../blocks/popup/__error/popup__error.css);
 @import url(../blocks/popup/__error/_visible/popup__error_visible.css);
+@import url(../blocks/card/__likes/card__likes.css);
+@import url(../blocks/card/__like-counter/card__like-counter.css);
+@import url(../blocks/profile/__image-wrapper/profile__image-wrapper.css);

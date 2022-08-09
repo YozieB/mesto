@@ -1,9 +1,18 @@
 export default class Card {
-  constructor(data, cardSelector, { handleCardClick }) {
+  constructor(
+    data,
+    cardSelector,
+    { handleCardClick, handleTrashClick, handleLike }
+  ) {
     this._name = data.name
     this._link = data.link
+    this.cardId = data._id
+    this._ownerId = data.owner._id
+    this.likes = data.likes
     this._cardSelector = cardSelector
     this.handleCardClick = handleCardClick
+    this.handleTrashClick = handleTrashClick
+    this.handleLike = handleLike
   }
 
   _getTemplate() {
@@ -15,21 +24,40 @@ export default class Card {
     return card
   }
 
-  _removeCard() {
+  removeCard() {
     this._element.remove()
   }
 
-  _handleLike(e) {
-    e.target.classList.toggle('card__heart_active')
+  setInitialLikes() {
+    if (
+      this.likes
+        .map(el => Object.values(el))
+        .flat()
+        .includes('c1982721dcd704bcf3332401')
+    ) {
+      this._heart.classList.add('card__heart_active')
+    } else {
+      this._heart.classList.remove('card__heart_active')
+    }
+  }
+
+  like(result) {
+    this._heart.classList.add('card__heart_active')
+    this._likeCounter.textContent = result
+  }
+
+  dislike(result) {
+    this._heart.classList.remove('card__heart_active')
+    this._likeCounter.textContent = result
   }
 
   _setEventListeners() {
     this._element.querySelector('.card__heart').addEventListener('click', e => {
-      this._handleLike(e)
+      this.handleLike(e)
     })
-    this._element
-      .querySelector('.card__trash')
-      .addEventListener('click', () => this._removeCard())
+    this._trash.addEventListener('click', () => {
+      this.handleTrashClick()
+    })
     this._cardImage.addEventListener('click', () => {
       this.handleCardClick(this._name, this._link)
     })
@@ -37,13 +65,19 @@ export default class Card {
 
   generateCard() {
     this._element = this._getTemplate()
+    this._heart = this._element.querySelector('.card__heart')
     this._cardImage = this._element.querySelector('.card__image')
     this._cardTitle = this._element.querySelector('.card__title')
+    this._likeCounter = this._element.querySelector('.card__like-counter')
+    this._trash = this._element.querySelector('.card__trash')
     this._setEventListeners()
     this._cardImage.src = this._link
     this._cardImage.alt = this._name
     this._cardTitle.textContent = this._name
-
+    this._likeCounter.textContent = this.likes.length
+    if (this._ownerId !== 'c1982721dcd704bcf3332401') {
+      this._trash.remove()
+    }
     return this._element
   }
 }
