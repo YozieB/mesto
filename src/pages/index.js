@@ -47,10 +47,6 @@ const api = new Api({
   },
 })
 
-/* Promise(api.getInitialCards).then(card => {
-  cards.renderitems(card)
-}) */
-
 Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
   ([user, initialCards]) => {
     cards.renderItems(initialCards)
@@ -59,25 +55,15 @@ Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
   }
 )
 
-/* api.getInitialCards().then(result => cards.renderItems(result)) */
-
-/* api.getUserInfo().then(result => {
-  console.log(result)
-  userInfo.setUserInfo(result.name, result.about)
-}) */
-
 const cards = new Section(
   {
     renderer: (cardItem, method = 'append') => {
       const card = generateCard(cardItem, '#card')
-      console.log(cardItem)
       cards.addItem(card, method)
     },
   },
   gallery
 )
-
-/* cards.renderItems() */
 
 const userInfo = new UserInfo({
   name: '.profile__title',
@@ -107,7 +93,6 @@ imagePopup.setEventListeners()
 const cardPopup = new PopupWithForm({
   popupSelector: cardPopupSelector,
   handleSubmit: cardItem => {
-    /*     console.log(cardItem) */
     api
       .addCard(cardItem.name, cardItem.link)
       .then(cardItem => {
@@ -124,7 +109,6 @@ cardPopup.setEventListeners()
 const avatarPopup = new PopupWithForm({
   popupSelector: profileAvatarPopupSelector,
   handleSubmit: avatar => {
-    console.log(avatar)
     api
       .updateAvatar(avatar.link)
       .then(res => {
