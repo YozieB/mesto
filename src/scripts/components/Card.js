@@ -78,7 +78,7 @@ export default class Card {
     this._cardImage.alt = this._name
     this._cardTitle.textContent = this._name
     this._likeCounter.textContent = this.likes.length
-    if (this._ownerId !== 'c1982721dcd704bcf3332401') {
+    if (this._ownerId !== this._userId) {
       this._trash.remove()
     }
     return this._element
