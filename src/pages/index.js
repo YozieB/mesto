@@ -47,8 +47,10 @@ const api = new Api({
   },
 })
 
+let userId
 Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
   ([user, initialCards]) => {
+    userId = user._id
     cards.renderItems(initialCards)
     userInfo.setUserInfo(user.name, user.about)
     userInfo.setUserAvatar(user.avatar)
@@ -64,7 +66,6 @@ const cards = new Section(
   },
   gallery
 )
-
 const userInfo = new UserInfo({
   name: '.profile__title',
   bio: '.profile__about',
@@ -81,7 +82,7 @@ const removePopup = new PopupConfirmRemove(removePopupSelector, {
       })
       .catch(error => console.log(`Error: ${error}`))
       .finally(() => {
-        removePopup.renderLoading(false, 'Да')
+        removePopup.renderLoading(false)
       })
   },
 })
@@ -97,6 +98,7 @@ const cardPopup = new PopupWithForm({
       .addCard(cardItem.name, cardItem.link)
       .then(cardItem => {
         cards.renderer(cardItem, 'prepend')
+        cardPopup.close()
       })
       .catch(error => console.log(`Error: ${error}`))
       .finally(() => {
@@ -113,6 +115,7 @@ const avatarPopup = new PopupWithForm({
       .updateAvatar(avatar.link)
       .then(res => {
         userInfo.setUserAvatar(res.avatar)
+        avatarPopup.close()
       })
       .catch(error => console.log(`Error: ${error}`))
       .finally(() => {
@@ -130,6 +133,7 @@ const profilePopup = new PopupWithForm({
       .setUserInfo(values.name, values.job)
       .then(() => {
         userInfo.setUserInfo(values.name, values.job)
+        profilePopup.close()
       })
       .catch(error => console.log(`Error: ${error}`))
       .finally(() => {
@@ -157,4 +161,4 @@ profileAvatar.addEventListener('click', () => {
   avatarPopup.open()
 })
 
-export { imagePopup, removePopup, api }
+export { imagePopup, removePopup, api, userId }

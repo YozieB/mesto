@@ -1,6 +1,6 @@
 import FormValidator from '../components/FormValidator.js'
 import Card from '../components/Card.js'
-import { imagePopup } from '../../pages/index.js'
+import { imagePopup, userId } from '../../pages/index.js'
 import { removePopup } from '../../pages/index.js'
 import { api } from '../../pages/index.js'
 const generateValidation = (data, selector) => {
@@ -11,27 +11,33 @@ const generateValidation = (data, selector) => {
 
 const generateCard = (data, selector) => {
   const card = new Card(data, selector, {
+    userId: userId,
     handleCardClick: (name, link) => {
       imagePopup.open(name, link)
     },
     handleTrashClick: () => {
       removePopup.open()
-      removePopup.currentCard = card
+      removePopup.setCurrentCard(card)
     },
     handleLike: e => {
       if (e.target.classList.contains('card__heart_active')) {
-        api.dislike(card.cardId).then(result => {
-          card.dislike(result.likes.length)
-        })
+        api
+          .dislike(card.cardId)
+          .then(result => {
+            card.dislike(result.likes.length)
+          })
+          .catch(error => console.log(`Error: ${error}`))
       } else {
-        api.like(card.cardId).then(result => {
-          card.like(result.likes.length)
-        })
+        api
+          .like(card.cardId)
+          .then(result => {
+            card.like(result.likes.length)
+          })
+          .catch(error => console.log(`Error: ${error}`))
       }
     },
   })
   const cardElement = card.generateCard()
-  card.setInitialLikes()
   return cardElement
 }
 

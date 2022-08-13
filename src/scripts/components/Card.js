@@ -2,7 +2,7 @@ export default class Card {
   constructor(
     data,
     cardSelector,
-    { handleCardClick, handleTrashClick, handleLike }
+    { handleCardClick, handleTrashClick, handleLike, userId }
   ) {
     this._name = data.name
     this._link = data.link
@@ -13,6 +13,7 @@ export default class Card {
     this.handleCardClick = handleCardClick
     this.handleTrashClick = handleTrashClick
     this.handleLike = handleLike
+    this._userId = userId
   }
 
   _getTemplate() {
@@ -26,14 +27,15 @@ export default class Card {
 
   removeCard() {
     this._element.remove()
+    this._element = null
   }
 
-  setInitialLikes() {
+  _setInitialLikes() {
     if (
       this.likes
         .map(el => Object.values(el))
         .flat()
-        .includes('c1982721dcd704bcf3332401')
+        .includes(this._userId)
     ) {
       this._heart.classList.add('card__heart_active')
     } else {
@@ -71,6 +73,7 @@ export default class Card {
     this._likeCounter = this._element.querySelector('.card__like-counter')
     this._trash = this._element.querySelector('.card__trash')
     this._setEventListeners()
+    this._setInitialLikes()
     this._cardImage.src = this._link
     this._cardImage.alt = this._name
     this._cardTitle.textContent = this._name

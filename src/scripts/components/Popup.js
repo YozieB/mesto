@@ -3,7 +3,6 @@ export default class Popup {
     this._popupSelector = popupSelector
     this._popupElement = document.querySelector(this._popupSelector)
     this._handleEscClose = this._handleEscClose.bind(this)
-    this._popupButton = this._popupElement.querySelector('.popup__form-btn')
   }
 
   open() {
@@ -31,13 +30,5 @@ export default class Popup {
         this.close()
       }
     })
-  }
-
-  renderLoading(isLoading, message = 'Сохранить') {
-    if (isLoading) {
-      this._popupButton.textContent = 'Сохранение...'
-    } else {
-      this._popupButton.textContent = message
-    }
   }
 }

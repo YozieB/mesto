@@ -7,11 +7,23 @@ export default class PopupConfirmRemove extends Popup {
     this._handleRemoveButtonClick = handleRemoveButtonClick
   }
 
+  setCurrentCard(id) {
+    this.currentCard = id
+  }
+
   setEventListeners() {
     this._removeBtn.addEventListener('click', () => {
-      this.renderLoading(true, 'Да')
+      this.renderLoading(true)
       this._handleRemoveButtonClick()
     })
     super.setEventListeners()
+  }
+
+  renderLoading(isLoading) {
+    if (isLoading) {
+      this._removeBtn.textContent = 'Удаление...'
+    } else {
+      this._removeBtn.textContent = 'Да'
+    }
   }
 }
